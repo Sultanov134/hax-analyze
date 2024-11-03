@@ -1,84 +1,79 @@
-/**
- * Copyright 2024 Sultanov134
- * @license Apache-2.0, see LICENSE for full text.
- */
 import { LitElement, html, css } from "lit";
 import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 
-/**
- * `hax-analyze`
- * 
- * @demo index.html
- * @element hax-analyze
- */
 export class HaxAnalyze extends DDDSuper(I18NMixin(LitElement)) {
-
   static get tag() {
     return "hax-analyze";
   }
 
   constructor() {
     super();
-    this.title = "";
-    this.t = this.t || {};
-    this.t = {
-      ...this.t,
-      title: "Title",
-    };
-    this.registerLocalization({
-      context: this,
-      localesPath:
-        new URL("./locales/hax-analyze.ar.json", import.meta.url).href +
-        "/../",
-      locales: ["ar", "es", "hi", "zh"],
-    });
+    this.title = "HAX Analyze";
+    this.siteUrl = ''; 
+    this.siteData = null; 
+    this.loading = false; 
   }
 
-  // Lit reactive properties
   static get properties() {
     return {
-      ...super.properties,
       title: { type: String },
+      siteUrl: { type: String },
+      siteData: { type: Object },
+      loading: { type: Boolean },
     };
   }
 
-  // Lit scoped styles
   static get styles() {
-    return [super.styles,
-    css`
-      :host {
-        display: block;
-        color: var(--ddd-theme-primary);
-        background-color: var(--ddd-theme-accent);
-        font-family: var(--ddd-font-navigation);
-      }
-      .wrapper {
-        margin: var(--ddd-spacing-2);
-        padding: var(--ddd-spacing-4);
-      }
-      h3 span {
-        font-size: var(--hax-analyze-label-font-size, var(--ddd-font-size-s));
-      }
-    `];
+    return [
+      super.styles,
+      css`
+        :host {
+          display: block;
+          font-family: Arial, sans-serif;
+        }
+        .container {
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 20px;
+        }
+        .header {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 20px;
+        }
+        .overview {
+          padding: 16px;
+          background-color: var(--hax-analyze-bg, #f4f4f4);
+          border-radius: 8px;
+          margin-bottom: 20px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+      `
+    ];
   }
 
-  // Lit render the HTML
   render() {
     return html`
-<div class="wrapper">
-  <h3><span>${this.t.title}:</span> ${this.title}</h3>
-  <slot></slot>
-</div>`;
+      <div class="container">
+        <div class="header">
+          <label for="site-url">HAX site:</label>
+          <input id="site-url" type="text" placeholder="Enter site JSON URL" @input="${this.updateUrl}" />
+          <button @click="${this.analyzeSite}">Analyze</button>
+        </div>
+        ${this.loading ? html`<p class="loading" aria-busy="true">Loading...</p>` : ''}
+        ${this.siteData ? this.renderSiteData() : ''}
+      </div>
+    `;
   }
 
-  /**
-   * haxProperties integration via file reference
-   */
-  static get haxProperties() {
-    return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url)
-      .href;
-  }
+  
+
+  
+
+
+ 
 }
 
 globalThis.customElements.define(HaxAnalyze.tag, HaxAnalyze);
