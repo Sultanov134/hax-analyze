@@ -33,13 +33,13 @@ export class HaxAnalyze extends DDDSuper(LitElement) {
                 .search-container {
                     display: flex;
                     align-items: center;
-                    gap: 8px;
-                    margin: 20px auto;
+                    gap: var(--ddd-spacing-1);
+                    margin: var(--ddd-spacing-5) auto;
                     max-width: 800px;
-                    padding: 10px;
+                    padding: var(--ddd-spacing-3);
                     background-color: #f9f9f9;
-                    border-radius: 8px;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    border-radius: var(--ddd-spacing-2);
+                    box-shadow: var(--ddd-spacing-0) var(--ddd-spacing-1) var(--ddd-spacing-2) var(--ddd-boxShadow-sm);
                 }
                 .search-label {
                     font-size: 1rem;
@@ -50,16 +50,16 @@ export class HaxAnalyze extends DDDSuper(LitElement) {
                 }
                 .search-input {
                     flex: 1;
-                    padding: 10px;
-                    border-radius: 4px;
-                    border: 1px solid #ddd;
+                    padding: var(--ddd-spacing-3);
+                    border-radius: var(--ddd-radius-sm);
+                    border: var(--ddd-border-sm) #ddd;
                     font-size: 1rem;
                     transition: border-color 0.3s;
                 }
                 .search-input:focus {
                     border-color: #0073e6;
                     outline: none;
-                    box-shadow: 0 0 5px rgba(0, 115, 230, 0.3);
+                    box-shadow: var(--ddd-spacing-0) var(--ddd-spacing-0) var(--ddd-spacing-1) var(--ddd-boxShadow-xl);
                 }
                 button {
                     padding: 10px 16px;
@@ -82,12 +82,12 @@ export class HaxAnalyze extends DDDSuper(LitElement) {
                 }
                 
                 .overview {
-                    border: 1px solid #ddd;
-                    border-radius: 8px;
-                    padding: 20px;
-                    margin: 20px auto;
+                    border: var(--ddd-border-md)  #ddd;
+                    border-radius: var(--ddd-radius-lg);
+                    padding: var(--ddd-spacing-5);
+                    margin: var(--ddd-spacing-5) auto;
                     max-width: 1000px;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    box-shadow: var(--ddd-spacing-0) var(--ddd-spacing-1) var(--ddd-spacing-2) var(--ddd-boxShadow-lg);
                     display: flex;
                     align-items: center;
                     gap: 20px;
@@ -96,7 +96,7 @@ export class HaxAnalyze extends DDDSuper(LitElement) {
                 .overview img {
                     width: 200px;
                     height: 200px;
-                    border-radius: 8px;
+                    border-radius: var(--ddd-spacing-2);
                     object-fit: cover;
                 }
                 .overview-title {
@@ -113,8 +113,8 @@ export class HaxAnalyze extends DDDSuper(LitElement) {
                     color: #888;
                 }
                 .icon {
-                    width: 24px;
-                    height: 24px;
+                    width: var(--ddd-spacing-6);
+                    height: var(--ddd-spacing-6);
                     color: #0073e6;
                 }
             `
@@ -207,7 +207,7 @@ export class HaxAnalyze extends DDDSuper(LitElement) {
                 </div>
             </div>
         ` : ''}
-        <hax-search json-url="${this.url}"></hax-search>
+        <hax-search></hax-search>
     `;
   }
 }
