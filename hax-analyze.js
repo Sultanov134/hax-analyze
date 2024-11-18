@@ -1,8 +1,9 @@
 import { LitElement, html, css } from "lit";
 import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import "./hax-search.js";
-import "@haxtheweb/simple-icon/simple-icon.js"; 
-import "@haxtheweb/simple-icon/lib/simple-icons.js"; 
+import "@haxtheweb/simple-icon/lib/simple-icons.js";
+import "@haxtheweb/simple-icon/simple-icon.js";
+
 
 export class HaxAnalyze extends DDDSuper(LitElement) {
     static get tag() {
