@@ -25,9 +25,9 @@ export class HaxSearch extends DDDSuper(LitElement) {
                 .results {
                     display: grid;
                     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                    gap: 16px;
-                    padding: 20px;
-                    margin: 0 auto;
+                    gap: var(--ddd-spacing-4);
+                    padding: var(--ddd-spacing-5);
+                    margin: var(--ddd-spacing-0) auto;
                     max-width: 1000px;
                 }
             `
@@ -41,8 +41,8 @@ export class HaxSearch extends DDDSuper(LitElement) {
                     <hax-card 
                         title="${item.title}"
                         description="${item.description}"
-                        created="${item.metadata?.created ? new Date(item.metadata.created * 1000).toLocaleDateString() : ''}"
-                        lastUpdated="${item.metadata?.updated ? new Date(item.metadata.updated * 1000).toLocaleDateString() : ''}"
+                        created="${item.metadata?.created ? new Date(parseInt(item.metadata.created) * 1000).toLocaleDateString() : ''}"
+                        lastUpdated="${item.metadata?.updated ? new Date(parseInt(item.metadata.updated) * 1000).toLocaleDateString() : ''}"
                         logo="${item.fullLogo}"
                         slug="${item.fullSlug}" 
                         contentPath="${item.contentPath}"  

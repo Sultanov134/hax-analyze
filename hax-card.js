@@ -8,13 +8,13 @@ export class HaxCard extends DDDSuper(LitElement) {
 
     constructor() {
         super();
-        this.title = '';
-        this.description = '';
-        this.created = '';
-        this.lastUpdated = '';
-        this.logo = '';
-        this.slug = '';
-        this.contentPath = '';
+        this.title = 'Untitled';
+        this.description = 'No description available.';
+        this.created = 'Unknown';
+        this.lastUpdated = 'Unknown';
+        this.logo = 'Https://via.placeholder.com/150';
+        this.slug = '#';
+        this.contentPath = '#';
     }
 
     static get properties() {
@@ -35,29 +35,38 @@ export class HaxCard extends DDDSuper(LitElement) {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                width: 100%; 
+                width: 100%;
                 max-width: 320px; 
-                padding: 20px;
-                margin: 16px;
-                border-radius: 12px;
-                box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-                background-color: #fff;
+                padding: var(--ddd-spacing-5);
+                margin: var(--ddd-spacing-4);
+                border-radius: var(--ddd-radius-sm);
+                box-shadow: var(--ddd-spacing-0) var(--ddd-spacing-1) var(--ddd-spacing-3) var(--ddd-boxShadow-lg);
+                background-color: var(--ddd-theme-default-white);
                 transition: transform 0.2s ease;
                 text-align: center;
                 box-sizing: border-box;
+                border: var(--ddd-border-sm);
+                gap: var(--ddd-spacing-3);
             }
 
             :host(:hover) {
                 transform: translateY(-6px);
             }
-
+            .card-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                justify-content: space-around;
+                min-height: 450px;
+                gap: var(--ddd-spacing-3);
+            }
             .image-container {
                 width: 100%;
                 display: flex;
                 justify-content: center;
-                margin-bottom: 16px;
+                margin-bottom: var(--ddd-spacing-4);
                 overflow: hidden;
-                border-radius: 8px;
+                border-radius: var(--ddd-spacing-2);
             }
 
             .image-container img {
@@ -65,61 +74,84 @@ export class HaxCard extends DDDSuper(LitElement) {
                 height: auto;
                 object-fit: contain; 
                 max-height: 180px;
-                border-radius: 8px;
+                border-radius: var(--ddd-spacing-2);
             }
 
             .title {
                 font-size: 1.4rem;
                 font-weight: bold;
-                margin: 16px 0 8px;
+                margin: var(--ddd-spacing-4) var(--ddd-spacing-0) var(--ddd-spacing-3);
             }
 
             .description {
                 font-size: 1rem;
-                color: #555;
-                margin: 0 0 12px;
-                padding: 0 10px;
+                color: var(--ddd-theme-default-potentialMidnight);
+                margin: var(--ddd-spacing-0) var(--ddd-spacing-0) var(--ddd-spacing-3);
+                padding: var(--ddd-spacing-0) var(--ddd-spacing-3);
+                max-height: 120px;
+                overflow-y: auto;
             }
 
             .metadata {
                 font-size: 0.9rem;
-                color: #888;
-                margin: 8px 0;
+                color: var(--ddd-theme-default-potential50);
+                margin: var(--ddd-spacing-2) var(--ddd-spacing-0);
             }
 
             .button-container {
-                margin-top: 12px;
+                margin-top: var(--ddd-spacing-3);
                 display: flex;
                 justify-content: center;
-                gap: 10px;
+                gap: var(--ddd-spacing-2);
                 width: 100%;
+            }
+            .imgLink {
+             text-decoration: none;
             }
 
             .button {
                 flex: 1;
-                padding: 10px;
+                padding: var(--ddd-spacing-2) ;
                 font-size: 0.9rem;
                 font-weight: bold;
-                color: #fff;
-                background-color: #0073e6;
+                color: var(--ddd-theme-default-slateMaxLight);
+                background-color: var(--ddd-theme-default-nittanyNavy);
                 border: none;
-                border-radius: 6px;
+                margin-top: auto;
+                border-radius: var(--ddd-radius-sm);
                 cursor: pointer;
                 transition: background-color 0.3s;
                 text-decoration: none;
                 text-align: center;
+                min-width: var(--ddd-spacing-25);
+                justify-content: space-around;
             }
 
             .button:hover {
-                background-color: #005bb5;
+                background-color: var(--ddd-theme-default-link);
+                transform: scale(1.05);
+            }
+
+            @media (max-width: 600px) {
+                :host {
+                    max-width: 100%;
+                    margin: var(--ddd-spacing-2);
+                }
+                .button-container{
+                    flex-direction: column;
+                    gap: var(--ddd-spacing-1);
+                }
             }
         `;
     }
 
     render() {
         return html`
+            <div class="card-container">
             <div class="image-container">
-                <img src="${this.logo}" alt="${this.title}" />
+                <a href="${this.logo}" target="_blank" class="imgLink" aria-label="View logo for ${this.title}">
+                    <img src="${this.logo|| 'https://via.placeholder.com/150'}" alt="${this.title}" />
+                </a>
             </div>
             <div class="title">${this.title}</div>
             <div class="description">${this.description}</div>
@@ -128,8 +160,9 @@ export class HaxCard extends DDDSuper(LitElement) {
                 <div>Last Updated: ${this.lastUpdated}</div>
             </div>
             <div class="button-container">
-                <a href="${this.contentPath}" target="_blank" class="button">Open Content</a>
-                <a href="${this.slug}" target="_blank" class="button">Open Source</a>
+                <a href="${this.contentPath}" target="_blank" class="button" aria-label="Open Source for ${this.title}">Open Source</a>
+                <a href="${this.slug}" target="_blank" class="button" aria-label="Open content for ${this.title}">Open Content</a>
+            </div>
             </div>
         `;
     }
